@@ -1,0 +1,28 @@
+---
+title: "Initial Growth Curves"
+author: "Maggi Brisbin"
+date: "2026-09-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(googlesheets4)
+library(scales)
+```
+
+```{r}
+fluor<- as.data.frame(read_sheet("https://docs.google.com/spreadsheets/d/159QQWbnsSv8EMKSw7MRolT06qdi9TPAlmggsCe00o0Q/edit?usp=sharing"))
+```
+
+```{r}
+fluor %>% ggplot(aes(x=TimePt, y= Fluor)) + geom_point(aes(color = Incubator)) +facet_wrap(~Species+Incubator, scales = "free_y") + theme_bw() + scale_y_continuous(labels = label_comma())
+```
+
+
