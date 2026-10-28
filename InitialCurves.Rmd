@@ -22,7 +22,14 @@ fluor<- as.data.frame(read_sheet("https://docs.google.com/spreadsheets/d/159QQWb
 ```
 
 ```{r}
-fluor %>% ggplot(aes(x=TimePt, y= Fluor)) + geom_point(aes(color = Incubator)) +facet_wrap(~Species+Incubator, scales = "free_y") + theme_bw() + scale_y_continuous(labels = label_comma())
+fluor$CultureRnd <- as.character(fluor$CultureRnd)
+
+fluor %>% ggplot(aes(x=TimePt, y= Fluor)) + geom_point(aes(color = CultureRnd))  +facet_wrap(~Species+Incubator, scales = "free_y") + theme_bw() + scale_y_continuous(labels = label_comma())
 ```
 
+
+```{r}
+View((fluor %>% filter(Species == "Thalassiosira psuedonana") %>% filter(Incubator == "24C")))
+
+```
 
