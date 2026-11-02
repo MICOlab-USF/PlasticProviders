@@ -28,8 +28,3 @@ fluor %>% ggplot(aes(x=TimePt, y= Fluor)) + geom_point(aes(color = CultureRnd)) 
 ```
 
 
-```{r}
-View((fluor %>% filter(Species == "Thalassiosira psuedonana") %>% filter(Incubator == "24C")))
-
-```
-
