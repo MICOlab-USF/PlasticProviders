@@ -28,31 +28,25 @@ fluor %>% ggplot(aes(x=TimePt, y= Fluor)) + geom_point(aes(color = CultureRnd)) 
 ```
 
 
-```{r}
-Thal<- fluor %>% filter(Species %in% c("Thalassiosira psuedonana", "Thalassiosira psuedonana_syn", "Thalassiosira psuedonana_syn_no_B12" )) %>%  ggplot(aes(x=TimePt, y= Fluor)) + geom_point(aes(color = CultureRnd))  +facet_grid(Incubator~Species, scales = "free_y") + theme_bw() + scale_y_continuous(labels = label_comma())
+```{r, warning = FALSE}
+pal_C <- c("#EF476F", "#118AB2", "#06D6A0", "#FFB703", "#073B4C", "#8338EC")
 
-Tis <- fluor %>% filter(Species %in% c("Tisochrysis",  "Tisochrysis_syn" , "Tisochrysis_syn_no_B12"  )) %>%  ggplot(aes(x=TimePt, y= Fluor)) + geom_point(aes(color = CultureRnd))  +facet_grid(Incubator~Species, scales = "free_y") + theme_bw() + scale_y_continuous(labels = label_comma())
+Thal<- fluor %>% filter(Species %in% c("Thalassiosira_psuedonana" )) %>%  ggplot(aes(x=TimePt, y= Fluor)) +  geom_point(aes(color = CultureRnd), size = 1, alpha = 0.5)+ geom_smooth(aes(color = CultureRnd), se=FALSE, linewidth = 0.5)  +facet_grid(Incubator~Media, scales = "free_y") + theme_bw() + scale_y_continuous(labels = label_comma())  + scale_color_manual(values = pal_C) + ggtitle("Thalassiosira psuedonana")
 
-library(patchwork)
-
-Thal + Tis +
-  plot_layout(guides = "collect") &
-  theme(legend.position = "bottom")
+Thal
 ```
 
 ```{r, warning=FALSE}
+Tis <- fluor %>% filter(Species %in% c("Tisochrysis"  )) %>%  ggplot(aes(x=TimePt, y= Fluor))  +  geom_point(aes(color = CultureRnd), size = 1, alpha = 0.5)+ geom_smooth(aes(color = CultureRnd), se=FALSE, linewidth = 0.5)  +facet_grid(Incubator~Media, scales = "free_y") + theme_bw() + scale_y_continuous(labels = label_comma())  + scale_color_manual(values = pal_C) + ggtitle("Tisochrysis")
 
-pal_C <- c("#EF476F", "#118AB2", "#06D6A0", "#FFB703", "#073B4C", "#8338EC")
+Tis
+```
 
-Thal<- fluor %>% filter(Species %in% c("Thalassiosira psuedonana", "Thalassiosira psuedonana_syn", "Thalassiosira psuedonana_syn_no_B(12)" )) %>%  ggplot(aes(x=TimePt, y= Fluor)) + geom_point(aes(color = CultureRnd), size = 1, alpha = 0.5)+ geom_smooth(aes(color = CultureRnd), se=FALSE, linewidth = 0.5)  +facet_grid(Incubator~Species, scales = "free_y") + theme_bw() + scale_y_continuous(labels = label_comma()) + scale_color_manual(values = pal_C) 
-
-Tis <- fluor %>% filter(Species %in% c("Tisochrysis",  "Tisochrysis_syn" , "Tisochrysis_syn_no_B(12)"  )) %>%  ggplot(aes(x=TimePt, y= Fluor)) + geom_point(aes(color = CultureRnd), size = 1, alpha = 0.5)+ geom_smooth(aes(color = CultureRnd), se=FALSE, linewidth = 0.5)  +facet_grid(Incubator~Species, scales = "free_y") + theme_bw() + scale_y_continuous(labels = label_comma()) + scale_color_manual(values = pal_C)
-
+```{r}
 library(patchwork)
 
-Thal + Tis +
-  plot_layout(guides = "collect") &
-  theme(legend.position = "bottom")
-```
+#Thal + Tis +
+ # plot_layout(guides = "collect") &
+  #theme(legend.position = "bottom")
 ```
 
